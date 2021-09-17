@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 require("./auth/passport");
 
-require("./models/user");
+// require("./models/user");
 
 const middlewares = require("./middlewares");
 const api = require("./api");

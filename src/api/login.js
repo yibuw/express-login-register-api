@@ -1,5 +1,7 @@
 const express = require('express');
-const User = require('../models/user');
+// const User = require('../models/user');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 const jwt = require('jsonwebtoken');
 
 const router = express.Router();
@@ -7,11 +9,17 @@ const router = express.Router();
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
-  const userWithEmail = await User.findOne({ where: { email } }).catch(
-    (err) => {
+  const userWithEmail = await prisma.user
+    .findUnique({ where: { email } })
+    .catch((err) => {
       console.log('Error: ', err);
-    }
-  );
+    });
+
+  //   const userWithEmail = await User.findOne({ where: { email } }).catch(
+  //     (err) => {
+  //       console.log('Error: ', err);
+  //     }
+  //   );
 
   if (!userWithEmail)
     return res
