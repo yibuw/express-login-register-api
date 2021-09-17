@@ -1,0 +1,9 @@
+POST  http://localhost:3000/api/products
+Content-Type: application/json
+
+{
+    "name": "MacBook Pro",
+    "SKU": "322904423XD443",
+    "price": 899,
+    "categoryId": 1
+}

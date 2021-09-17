@@ -1,0 +1,9 @@
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+    "email":"yibuw@osakakuma.com",
+    "password": "Asd123",
+    "firstName": "yibu",
+    "lastName": "wang"
+}
