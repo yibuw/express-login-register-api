@@ -3,6 +3,7 @@ const express = require('express');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
@@ -26,7 +27,7 @@ router.post('/login', async (req, res) => {
       .status(400)
       .json({ message: 'Email or password does not match!' });
 
-  if (userWithEmail.password !== password)
+  if (await bcrypt.compare(password, userWithEmail.password))
     return res
       .status(400)
       .json({ message: 'Email or password does not match!' });
