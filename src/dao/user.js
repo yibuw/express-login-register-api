@@ -2,7 +2,6 @@ const createError = require('http-errors');
 const { db } = require('../database');
 
 class UserDAO {
-  constructor() {}
   async create(data) {
     try {
       const res = await db.user.create({
