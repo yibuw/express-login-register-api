@@ -59,10 +59,6 @@ class UserService {
         throw createError.BadRequest(error);
     }
   }
-
-  async findByEmail(email) {
-    return await user.getByUnique(email);
-  }
 }
 
 module.exports = new UserService();

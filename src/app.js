@@ -3,15 +3,14 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
 require('dotenv').config();
+
 require('./auth/passport');
 
 const createError = require('http-errors');
 
-// require("./models/user");
-
 // const middlewares = require('./middlewares');
-// const api = require('./api');
-const routes = require('./routes/index')
+const { verifyAccessToken } = require('./middleware/verifyAccessToken');
+const routes = require('./routes/index');
 
 const app = express();
 
@@ -24,7 +23,7 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
+app.get('/', verifyAccessToken, (req, res) => {
   res.status(200).send({
     message: 'api server running',
   });
