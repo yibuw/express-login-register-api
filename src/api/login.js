@@ -13,8 +13,8 @@ router.post('/login', async (req, res) => {
   const userWithEmail = await prisma.user
     .findUnique({
       where: {
-        email: email,
-      },
+        name: 'yibu',
+      }
     })
     .catch((err) => {
       console.log('Error: ', err);
