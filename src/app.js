@@ -7,6 +7,8 @@ const ranktoken = require('rand-token');
 require("dotenv").config();
 require("./auth/passport");
 
+
+
 // require("./models/user");
 
 const middlewares = require("./middlewares");
@@ -14,8 +16,9 @@ const api = require("./api");
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 
 app.use(morgan("dev"));
 app.use(helmet());
