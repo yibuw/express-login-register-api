@@ -2,6 +2,8 @@ const express = require('express');
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const router = express.Router();
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 router.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
@@ -18,11 +20,24 @@ router.post('/register', async (req, res) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const newUser = new User({ name, email, password: hashedPassword });
-  const savedUser = await newUser.save().catch((err) => {
-    console.log('Error: ', err);
-    res.status(500).json({ error: 'Cannot register user at the moment!' });
-  });
+  const savedUser = prisma.user
+    .create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+      },
+    })
+    .catch((err) => {
+      console.log('Error', err);
+      res.status(500).json({ error: 'Cannot register user at the moment!' });
+    });
+
+  //   const newUser = new User({ name, email, password: hashedPassword });
+  //   const savedUser = await newUser.save().catch((err) => {
+  //     console.log('Error: ', err);
+  //     res.status(500).json({ error: 'Cannot register user at the moment!' });
+  //   });
 
   if (savedUser) res.json({ message: 'Thanks for registering' });
 });
