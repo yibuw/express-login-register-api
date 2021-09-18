@@ -3,6 +3,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const { PrismaClient } = require('@prisma/client');
+const { signAccessToken, signRefreshToken } = require('../helpers/jwt_helper');
 const prisma = new PrismaClient();
 
 router.post('/register', async (req, res) => {
@@ -28,9 +29,10 @@ router.post('/register', async (req, res) => {
     return res.status(409).json({ message: 'User with email already exists!' });
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
 
-  const savedUser = prisma.user
+  const savedUser = await prisma.user
     .create({
       data: {
         name,
@@ -48,8 +50,13 @@ router.post('/register', async (req, res) => {
   //     console.log('Error: ', err);
   //     res.status(500).json({ error: 'Cannot register user at the moment!' });
   //   });
-
-  if (savedUser) res.json({ message: 'Thanks for registering' });
+  const accessToken = await signAccessToken(email);
+  const refreshToken = await signRefreshToken(email);
+  if (savedUser)
+    res
+      .status(200)
+      .send({ message: 'Thanks for registering', accessToken, refreshToken });
+  //   res.json({ message: 'Thanks for registering' });
 });
 
 module.exports = router;
