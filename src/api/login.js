@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const router = express.Router();
-const randtoken = require('rand-token')
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
