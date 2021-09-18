@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-
 const router = express.Router();
 
 router.post('/login', async (req, res) => {
@@ -13,8 +12,8 @@ router.post('/login', async (req, res) => {
   const userWithEmail = await prisma.user
     .findUnique({
       where: {
-        name: 'yibu',
-      }
+        email,
+      },
     })
     .catch((err) => {
       console.log('Error: ', err);
