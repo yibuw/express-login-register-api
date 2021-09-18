@@ -12,10 +12,37 @@ generator client {
 
 //  String？  可以null ， 不写就是 not null
 model User {
+    // talbe name
+    @@map("user")
+
     id        Int       @id @default(autoincrement())
     name      String    @db.VarChar(200)
     email     String    @unique @db.VarChar(200)
     password  String    @db.VarChar(200)
     createdAt DateTime? @default(now())
     updatedAt DateTime? @default(now())
+}
+
+
+model Product {
+    // table name
+    @@map("product")
+
+    id         String   @id @default(cuid())
+    SKU        String   @unique
+    quantity   Int      @default(0)
+    name       String   @unique @db.VarChar(200)
+    price      Int      @default(999)
+    createdAt  DateTime @default(now())
+    category   Category @relation(fields: [categoryId], references: [id])
+    categoryId Int
+}
+
+model Category {
+    // table name
+    @@map("category")
+
+    id       Int       @id @default(autoincrement())
+    name     String    @unique
+    products Product[]
 }
