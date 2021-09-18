@@ -1,7 +1,7 @@
-const createError = require('http-errors')
+const createError = require('http-errors');
 
 module.exports = {
   payment: async (req, res, next) => {
-    res.send('You have a total of: 2400$');
+    res.status(200).send('You have a total of: 2400$');
   },
 };

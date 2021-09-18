@@ -2,7 +2,6 @@ const passport = require('passport');
 const passportJwt = require('passport-jwt');
 const ExtractJwt = passportJwt.ExtractJwt;
 const StrategyJwt = passportJwt.Strategy;
-// const User = require("../models/user");
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
@@ -17,7 +16,7 @@ passport.use(
         prisma.user
           .findUnique({
             where: {
-              id: jwtPayload.id,
+              email_norm: jwtPayload.aud,
             },
           })
           //   return User.findOne({ where: { id: jwtPayload.id } })

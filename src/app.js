@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 require('dotenv').config();
 
-require('./auth/passport');
+require('./passport');
 
 const createError = require('http-errors');
 
