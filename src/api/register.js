@@ -1,5 +1,5 @@
 const express = require('express');
-const User = require('../models/user');
+// const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const { PrismaClient } = require('@prisma/client');
@@ -8,11 +8,21 @@ const prisma = new PrismaClient();
 router.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
 
-  const alreadyExistsUser = await User.findOne({ where: { email } }).catch(
-    (err) => {
+  const alreadyExistsUser = await prisma.user
+    .findUnique({
+      where: {
+        email,
+      },
+    })
+    .catch((err) => {
       console.log('Error: ', err);
-    }
-  );
+    });
+
+  //   const alreadyExistsUser = await User.findOne({ where: { email } }).catch(
+  //     (err) => {
+  //       console.log('Error: ', err);
+  //     }
+  //   );
 
   if (alreadyExistsUser) {
     return res.status(409).json({ message: 'User with email already exists!' });

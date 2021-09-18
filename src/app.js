@@ -3,10 +3,11 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const ranktoken = require('rand-token');
 require("dotenv").config();
 require("./auth/passport");
 
-require("./models/user");
+// require("./models/user");
 
 const middlewares = require("./middlewares");
 const api = require("./api");

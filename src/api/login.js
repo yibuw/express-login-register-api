@@ -46,7 +46,10 @@ router.post('/login', async (req, res) => {
   const jwtToken = jwt.sign(
     { id: userWithEmail.id, email: userWithEmail.email },
     process.env.JWT_SECRET,
-    { expiresIn: 60 }
+    {
+      //1 minute
+      expiresIn: 60,
+    }
   );
 
   res.json({ message: 'Welcome Back!', token: jwtToken });
