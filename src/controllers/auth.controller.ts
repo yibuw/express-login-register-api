@@ -5,7 +5,6 @@ import UserService from '@service/user.service';
 import bcrypt from 'bcrypt';
 import { Request, Response, NextFunction } from 'express';
 
-
 export const register = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { name, email, password } = req.body;

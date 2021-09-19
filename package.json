@@ -4,14 +4,16 @@
     "description": " A basic starter for an express.js API",
     "main": "index.js",
     "scripts": {
-        "build": "rm -rf dist && tsc",
+        "build": "rm -rf dist && tsc -p tsconfig.json",
         "start": "node dist/index.js",
         "dev": "nodemon --config nodemon.json src/index.ts",
         "debug": "nodemon --config nodemon.json --inspect-brk src/index.ts",
         "lint": "eslint --fix src",
         "test": "mocha --exit",
+        "prettier": "prettier --config ./.prettierrc --write src/**/*.ts",
         "generate": "npx prisma generate",
-        "migrate": "npx prisma migrate dev"
+        "migrate": "npx prisma migrate dev",
+        "pm2": "pm2 start dist/index.js"
     },
     "keywords": [],
     "author": "CJ R. <cj@null.computer> (https://w3cj.now.sh)",
@@ -38,6 +40,7 @@
         "passport": "^0.4.1",
         "passport-jwt": "^4.0.0",
         "passport-local": "^1.0.0",
+        "pm2": "^5.1.1",
         "validator": "^13.6.0"
     },
     "devDependencies": {

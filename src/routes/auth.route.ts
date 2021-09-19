@@ -1,4 +1,4 @@
-import { register, login, refreshToken, logout } from "@controllers/auth.controller";
+import { register, login, refreshToken, logout } from '@controllers/auth.controller';
 import express from 'express';
 const router = express.Router();
 
