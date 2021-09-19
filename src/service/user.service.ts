@@ -3,8 +3,9 @@ import createError from 'http-errors';
 import { signAccessToken, signRefreshToken } from '@helpers/jwt';
 import bcrypt from 'bcrypt';
 import { ITokenInfo, IUserInfo, IUserLogin, IUserService } from './user.interface';
+import { User } from '@prisma/client';
 
-class UserService implements IUserService {
+class UserServiceImpl implements IUserService {
     async register(info: IUserInfo): Promise<ITokenInfo> {
         try {
             const alreadyExistsUser = await user.getByUnique(info.email_norm);
@@ -13,13 +14,15 @@ class UserService implements IUserService {
                 throw new createError.Conflict(`${info.email} is already been registered`);
             }
 
-            const savedUser = await user.create({
+            const data = {
                 password: info.hashedPassword,
                 name: info.name,
                 email: info.email,
                 name_norm: info.name_norm,
                 email_norm: info.email_norm,
-            });
+            } as User;
+
+            const savedUser = await user.create(data);
 
             const accessToken = await signAccessToken(info.email_norm);
             const refreshToken = await signRefreshToken(info.email_norm);
@@ -114,4 +117,4 @@ class UserService implements IUserService {
     // }
 }
 
-export default new UserService();
+export default new UserServiceImpl();

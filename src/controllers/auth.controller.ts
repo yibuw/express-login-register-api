@@ -1,7 +1,7 @@
 import createError from 'http-errors';
 import { authSchema } from '@helpers/validation_schema';
 import { signAccessToken, signRefreshToken, verifyRefreshToken } from '@helpers/jwt';
-import UserService from '@service/user.service';
+import UserServiceImpl from '@service/user.service';
 import bcrypt from 'bcrypt';
 import { Request, Response, NextFunction } from 'express';
 
@@ -18,7 +18,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        const result = await UserService.register({
+        const result = await UserServiceImpl.register({
             name,
             name_norm,
             email,
@@ -41,7 +41,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
             password,
         });
 
-        const result = await UserService.login({ email_norm, password });
+        const result = await UserServiceImpl.login({ email_norm, password });
 
         res.status(200).send(result);
     } catch (error) {

@@ -1,8 +1,8 @@
 import createError from 'http-errors';
 import { db } from '@database/index';
-
+import { User } from '@prisma/client';
 class UserDAO {
-    async create(data: any) {
+    async create(data: User) {
         try {
             const res = await db.user.create({
                 data,
@@ -34,9 +34,9 @@ class UserDAO {
     }
     async deleteByUnique(email: string) {
         try {
-            const res = await db.user.deleteByUnique({
+            const res = await db.user.delete({
                 where: {
-                    email,
+                    email: email,
                 },
             });
             return res;
