@@ -27,7 +27,7 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.get('/', verifyAccessToken, (req, res) => {
+app.get('/', verifyAccessToken, (req: Request, res: Response) => {
     res.status(200).send({
         message: 'api server running',
     });
