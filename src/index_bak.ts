@@ -1,4 +1,4 @@
-import 'module-alias/register';
+// import 'module-alias/register';
 
 import express from 'express';
 import morgan from 'morgan';
@@ -7,14 +7,13 @@ import cors from 'cors';
 import createError from 'http-errors';
 import { Errback, Request, Response, NextFunction } from 'express';
 require('dotenv').config();
-
-require('./passport');
+require('./passport-config');
 
 // import createError from 'http-errors';
 
 // const middlewares = require('./middlewares');
 import { verifyAccessToken } from './middleware/verifyAccessToken';
-import routes from '@routes/index';
+import routes from 'routes/index';
 
 const app = express();
 
