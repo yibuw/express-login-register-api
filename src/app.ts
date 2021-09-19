@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 import './passport-config';
 
-import createServer from 'server';
+import createServer from './server';
 const startServer = () => {
     const app = createServer();
     const port: number = parseInt(<string>process.env.PORT, 10) || 3000;

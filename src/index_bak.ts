@@ -13,7 +13,7 @@ require('./passport-config');
 
 // const middlewares = require('./middlewares');
 import { verifyAccessToken } from './middleware/verifyAccessToken';
-import routes from 'routes/index';
+import routes from './routes/index';
 
 const app = express();
 

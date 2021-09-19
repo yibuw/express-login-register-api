@@ -4,7 +4,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import createError from 'http-errors';
 import { verifyAccessToken } from './middleware/verifyAccessToken';
-import routes from 'routes/index';
+import routes from './routes/index';
 
 export default function createServer() {
     const app: Application = express();

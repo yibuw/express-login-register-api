@@ -1,7 +1,7 @@
 import express from 'express';
 // import  passport from 'passport';
-import { payment } from 'controllers/payment.controller';
-import { verifyAccessToken } from 'middleware/verifyAccessToken';
+import { payment } from '../controllers/payment.controller';
+import { verifyAccessToken } from '../middleware/verifyAccessToken';
 
 const router = express.Router();
 
