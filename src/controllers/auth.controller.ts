@@ -1,7 +1,7 @@
 import createError from 'http-errors';
-import { authSchema } from '@helpers/validation_schema';
-import { signAccessToken, signRefreshToken, verifyRefreshToken } from '@helpers/jwt';
-import UserServiceImpl from '@service/user.service';
+import { authSchema } from 'helpers/validation_schema';
+import { signAccessToken, signRefreshToken, verifyRefreshToken } from 'helpers/jwt';
+import UserServiceImpl from 'service/user.service';
 import bcrypt from 'bcrypt';
 import { Request, Response, NextFunction } from 'express';
 

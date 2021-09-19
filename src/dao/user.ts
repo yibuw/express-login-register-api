@@ -1,5 +1,5 @@
 import createError from 'http-errors';
-import { db } from '@database/index';
+import { db } from 'database/index';
 import { User } from '@prisma/client';
 class UserDAO {
     async create(data: User) {

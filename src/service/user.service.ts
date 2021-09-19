@@ -1,6 +1,6 @@
-import UserDAO from '@dao/user';
+import UserDAO from 'dao/user';
 import createError from 'http-errors';
-import { signAccessToken, signRefreshToken } from '@helpers/jwt';
+import { signAccessToken, signRefreshToken } from 'helpers/jwt';
 import bcrypt from 'bcrypt';
 import { ITokenInfo, IUserInfo, IUserLogin, IUserService } from './user.interface';
 import { User } from '@prisma/client';
