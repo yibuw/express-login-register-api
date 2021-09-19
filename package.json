@@ -77,14 +77,5 @@
     },
     "lint-staged": {
         "*.{js,ts}": "eslint --ext .js,.ts --fix --max-warnings 0 src/"
-    },
-    "_moduleAliases": {
-        "@controllers": "dist/controllers",
-        "@dao": "dist/dao",
-        "@database": "dist/database",
-        "@helpers": "dist/helpers",
-        "@routes": "dist/routes",
-        "@service": "dist/service",
-        "@middleware": "dist/middleware"
     }
 }
