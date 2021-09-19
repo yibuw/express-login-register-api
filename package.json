@@ -13,6 +13,7 @@
         "prettier": "prettier --config ./.prettierrc --write src/**/*.ts",
         "generate": "npx prisma generate",
         "migrate": "npx prisma migrate dev",
+        "ui": "npx prisma studio",
         "pm2": "pm2 start dist/index.js"
     },
     "keywords": [],

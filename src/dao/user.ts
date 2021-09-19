@@ -52,7 +52,7 @@ class UserDAO {
             throw new createError.BadRequest(error);
         }
     }
-    async updateByUnique(email: string, data: any) {
+    async updateByUnique(email: string, data: User) {
         try {
             const res = await db.user.update({
                 where: {

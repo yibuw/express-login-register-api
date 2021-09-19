@@ -1,4 +1,4 @@
-import user from '@dao/user';
+import UserDAO from '@dao/user';
 import createError from 'http-errors';
 import { signAccessToken, signRefreshToken } from '@helpers/jwt';
 import bcrypt from 'bcrypt';
@@ -8,7 +8,7 @@ import { User } from '@prisma/client';
 class UserServiceImpl implements IUserService {
     async register(info: IUserInfo): Promise<ITokenInfo> {
         try {
-            const alreadyExistsUser = await user.getByUnique(info.email_norm);
+            const alreadyExistsUser = await UserDAO.getByUnique(info.email_norm);
 
             if (alreadyExistsUser) {
                 throw new createError.Conflict(`${info.email} is already been registered`);
@@ -22,7 +22,7 @@ class UserServiceImpl implements IUserService {
                 email_norm: info.email_norm,
             } as User;
 
-            const savedUser = await user.create(data);
+            const savedUser = await UserDAO.create(data);
 
             const accessToken = await signAccessToken(info.email_norm);
             const refreshToken = await signRefreshToken(info.email_norm);
@@ -42,7 +42,7 @@ class UserServiceImpl implements IUserService {
     }
     async login(info: IUserLogin): Promise<Omit<ITokenInfo, 'message'>> {
         try {
-            const userWithEmail = await user.getByUnique(info.email_norm);
+            const userWithEmail = await UserDAO.getByUnique(info.email_norm);
             if (!userWithEmail) {
                 throw new createError.NotFound('User not registered');
             }
