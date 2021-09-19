@@ -16,7 +16,7 @@ class UserDAO {
         try {
             const res = await db.user.findUnique({
                 where: {
-                    email,
+                    email_norm: email,
                 },
             });
             return res;
@@ -36,7 +36,7 @@ class UserDAO {
         try {
             const res = await db.user.delete({
                 where: {
-                    email: email,
+                    email_norm: email,
                 },
             });
             return res;
@@ -56,7 +56,7 @@ class UserDAO {
         try {
             const res = await db.user.update({
                 where: {
-                    email,
+                    email_norm: email,
                 },
                 data,
             });
